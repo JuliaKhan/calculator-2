@@ -1,9 +1,9 @@
 """CLI application for a prefix-notation calculator.
 
 Quit:       'q' or 'quit' exits the application
-Add:        '+ num1 num2' prints num1 + num2
+Add:        '+ num1 num2 ...' prints num1 + num2 + ...
 Subtract:   '- num1 num2' prints num1 - num2
-Multiply:   '* num1 num2' prints num1 * num2
+Multiply:   '* num1 num2 ...' prints num1 * num2 * ...
 Divide:     '/ num1 num2' prints num1 / num2
 Square:     'square num1' prints num1 ** 2
 Cube:       'cube num1' prints num1 ** 3
@@ -13,6 +13,8 @@ Modulus:    'mod num1 num2' prints num1 % num2
 
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod, )
+
+import functools    #for the functools.reduce function
 
 while True:                                     #begins REPL
     user_input = input("Enter your equation. ") #eg input:  + 1 2
@@ -24,7 +26,10 @@ while True:                                     #begins REPL
 
     elif tokens[0] == '+':  #checks first item of tokens for operation
         try:                #exception handling for non-float inputs
-            print(add(float(tokens[1]), float(tokens[2]))) #print answer
+            operands = []   
+            for num in tokens[1:]:
+                operands.append(float(num)) #operands is a list of floats
+            print(functools.reduce(add,operands)) #iterates the add function
         except:
             print("invalid operation")
 
@@ -36,7 +41,10 @@ while True:                                     #begins REPL
 
     elif tokens[0] == '*':
         try:
-            print(multiply(float(tokens[1]),float(tokens[2])))
+            operands = []
+            for num in tokens[1:]:
+                operands.append(float(num))
+            print(functools.reduce(multiply,operands))
         except:
             print("invalid operation")
     

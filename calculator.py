@@ -14,7 +14,7 @@ Modulus:    'mod num1 num2' prints num1 % num2
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod, )
 
-from functools import reduce    #for iterating + and * later
+import functools #for iterating + and * later
 
 while True:                                     #begins REPL
     user_input = input("Enter your equation. ") #eg input:  + 1 2
